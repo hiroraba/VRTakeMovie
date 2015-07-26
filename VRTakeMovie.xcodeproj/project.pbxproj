@@ -14,6 +14,7 @@
 		69004D5B1B64B11B006204F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69004D591B64B11B006204F1 /* LaunchScreen.storyboard */; };
 		69004D661B64B11B006204F1 /* VRTakeMovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004D651B64B11B006204F1 /* VRTakeMovieTests.swift */; };
 		69004D711B64B11B006204F1 /* VRTakeMovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004D701B64B11B006204F1 /* VRTakeMovieUITests.swift */; };
+		69004D7F1B64BCD6006204F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69004D7E1B64BCD5006204F1 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		69004D6C1B64B11B006204F1 /* VRTakeMovieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VRTakeMovieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69004D701B64B11B006204F1 /* VRTakeMovieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VRTakeMovieUITests.swift; sourceTree = "<group>"; };
 		69004D721B64B11B006204F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69004D7E1B64BCD5006204F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69004D7F1B64BCD6006204F1 /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +80,7 @@
 		69004D441B64B11B006204F1 = {
 			isa = PBXGroup;
 			children = (
+				69004D7E1B64BCD5006204F1 /* MobileCoreServices.framework */,
 				69004D4F1B64B11B006204F1 /* VRTakeMovie */,
 				69004D641B64B11B006204F1 /* VRTakeMovieTests */,
 				69004D6F1B64B11B006204F1 /* VRTakeMovieUITests */,

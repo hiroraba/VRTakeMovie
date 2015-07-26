@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 class VRTakeMovieViewController: UIViewController,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
@@ -22,6 +23,7 @@ class VRTakeMovieViewController: UIViewController,UIActionSheetDelegate,UIImageP
         sheet.addButtonWithTitle("キャンセル")
         sheet.addButtonWithTitle("写真を撮る")
         sheet.addButtonWithTitle("カメラロールから選択")
+        sheet.addButtonWithTitle("動画を取る")
         sheet.cancelButtonIndex = 0
         sheet.showInView(self.view);
     }
@@ -34,12 +36,13 @@ class VRTakeMovieViewController: UIViewController,UIActionSheetDelegate,UIImageP
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if(buttonIndex == 1){
             self.pickImageFromCamera()
-        } else {
+        } else if(buttonIndex == 2) {
             self.pickImageFromLibrary()
+        } else {
+            self.startCamera()
         }
     }
     
-    // 写真を撮ってそれを選択
     func pickImageFromCamera() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             let controller = UIImagePickerController()
@@ -49,7 +52,6 @@ class VRTakeMovieViewController: UIViewController,UIActionSheetDelegate,UIImageP
         }
     }
     
-    // ライブラリから写真を選択する
     func pickImageFromLibrary() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
             let controller = UIImagePickerController()
@@ -59,17 +61,6 @@ class VRTakeMovieViewController: UIViewController,UIActionSheetDelegate,UIImageP
         }
     }
     
-    /*
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        if info[UIImagePickerControllerOriginalImage] != nil {
-            
-            let image:UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-            self.dismissViewControllerAnimated(true, completion: {() -> Void in
-                self.previewImageView.image = image
-            })
-        }
-    }
-*/
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if info[UIImagePickerControllerOriginalImage] != nil {
             
@@ -78,8 +69,40 @@ class VRTakeMovieViewController: UIViewController,UIActionSheetDelegate,UIImageP
                 self.previewImageView.image = image
             })
         }
+        if let url = info[UIImagePickerControllerMediaURL] as? NSURL {
+            self.dismissViewControllerAnimated(true, completion: {() -> Void in
+            })
+
+        }
+
     }
     
+    func startCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            let ipc: UIImagePickerController = UIImagePickerController()
+            ipc.delegate = self
+            ipc.sourceType = UIImagePickerControllerSourceType.Camera
+            ipc.mediaTypes = [kUTTypeMovie as String]
+            ipc.allowsEditing = false
+            ipc.showsCameraControls = true
+            self.presentViewController(ipc, animated: true, completion: nil)
+        } else {
+            print("この端末ではカメラを利用できません")
+        }
+    }
+    
+    
+    /*
+    * カメラロールへの保存が終了したとき
+    */
+    func video(videoPath: String, didFinishSavingWithError error: NSError!, contextInfo: UnsafeMutablePointer<Void>) {
+        if (error != nil) {
+            print("動画の保存に失敗しました。")
+        } else {
+            print("動画の保存に成功しました。")
+        }
+    }
+}
     
     /*
     // MARK: - Navigation
@@ -91,6 +114,6 @@ class VRTakeMovieViewController: UIViewController,UIActionSheetDelegate,UIImageP
     }
     */
     
-}
+
 
 
